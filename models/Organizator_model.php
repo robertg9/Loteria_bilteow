@@ -14,19 +14,32 @@ class Organizator_model {
 	public $haslo;
 	public $validacja_haslo;
 
-	public function __construct() {
-		$this->Pseudonim = $_POST['pseudonim'];
-		$this->Imie = $_POST['imie'];
-		$this->Nazwisko = $_POST['nazwisko'];
-		$this->Telefon = $_POST['telefon'];
-		$this->e_mail = $_POST['e_mail'];
-		$this->validacja_e_mail['validacja_e_mail'];
-		$this->haslo = $_POST['haslo'];
-		$this->validacja_haslo = $_POST['validacja_haslo'];
+	public function __construct($bool_rejestracja) {
+		if($bool_rejestracja == true) {
+			$this->Pseudonim = $_POST['pseudonim'];
+			$this->Imie = $_POST['imie'];
+			$this->Nazwisko = $_POST['nazwisko'];
+			$this->Telefon = $_POST['telefon'];
+			$this->e_mail = $_POST['e_mail'];
+			$this->validacja_e_mail = $_POST['validacja_e_mail'];
+			$this->haslo = $_POST['haslo'];
+			$this->validacja_haslo = $_POST['validacja_haslo'];
 
-		$this->db = new Database("root", "", "loteria_biletów");
-		$this->db->connect();
+			$this->db = new Database("root", "", "loteria_biletów");
+			$this->db->connect();
+		}
+		else if($bool_rejestracja == false) {
+			$this->Pseudonim = $_POST['pseudonim'];
+			$this->haslo = $_POST['haslo'];
+
+			$this->db = new Database("root", "", "loteria_biletów");
+			$this->db->connect();
+		}
+		else {
+			echo "zmienna podana w konstruktorze musi byæ typu boolena(true lub false)";
+		}
 	}
+
 
 	public function INSERT_Dodaj_organizatora() {
 		$this->db->PDO->exec("INSERT INTO organizator
@@ -38,18 +51,7 @@ class Organizator_model {
 				'$this->Pseudonim',
 				'$this->haslo'
 		)");
-		/*
-		if($this->haslo == NULL) { zwrca NULL
-			echo "NULL";       
-		}
- 		
-		if($this->haslo == $this->validacja_haslo) {
-		echo "hasloval";
-		}
-		else {
-			echo "Has³o validacja nie jest takie samo jak has³o";
-		}
-		*/
+
 	}
 	public function DELETE() {
 		$query="SELECT * FROM kontakt";
