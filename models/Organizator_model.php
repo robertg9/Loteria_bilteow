@@ -3,6 +3,8 @@ include("/../db/Database.php");
 
 class Organizator_model {
 
+	const pseudonim_query = 'SELECT Pseudonim FROM organizator';
+
 	public $db;
 	public $id_Organizator;
 	public $Imie;
@@ -15,6 +17,9 @@ class Organizator_model {
 	public $validacja_haslo;
 
 	public function __construct($bool_rejestracja) {
+		$this->db = new Database("root", "", "loteria_biletów");
+		$this->db->connect();
+		
 		if($bool_rejestracja == true) {
 			$this->Pseudonim = $_POST['pseudonim'];
 			$this->Imie = $_POST['imie'];
@@ -24,16 +29,10 @@ class Organizator_model {
 			$this->validacja_e_mail = $_POST['validacja_e_mail'];
 			$this->haslo = $_POST['haslo'];
 			$this->validacja_haslo = $_POST['validacja_haslo'];
-
-			$this->db = new Database("root", "", "loteria_biletów");
-			$this->db->connect();
 		}
 		else if($bool_rejestracja == false) {
 			$this->Pseudonim = $_POST['pseudonim'];
 			$this->haslo = $_POST['haslo'];
-
-			$this->db = new Database("root", "", "loteria_biletów");
-			$this->db->connect();
 		}
 		else {
 			echo "zmienna podana w konstruktorze musi byæ typu boolena(true lub false)";
@@ -42,6 +41,7 @@ class Organizator_model {
 
 
 	public function INSERT_Dodaj_organizatora() {
+		$md5 = md5($this->haslo) ;
 		$this->db->PDO->exec("INSERT INTO organizator
 				(Imie,Nazwisko,Telefon,e_mail,Pseudonim,haslo) VALUES (
 				'$this->Imie',
@@ -49,9 +49,13 @@ class Organizator_model {
 				'$this->Telefon',
 				'$this->e_mail',
 				'$this->Pseudonim',
-				'$this->haslo'
+				'$md5'
 		)");
+	}
 
+	public function getHasloByPseudonim() {
+		$haslo_query = "SELECT haslo FROM organizator WHERE Pseudonim = '$this->Pseudonim'";
+		return $haslo_query;
 	}
 	public function DELETE() {
 		$query="SELECT * FROM kontakt";

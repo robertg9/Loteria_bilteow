@@ -3,14 +3,21 @@
 include '/../models/Organizator_model.php';
 
 class Orgranizator_controller {
+	private $host;
+	private $uri;
+	private $formularzLogowanie;
 
 	public $Org_mdl;
+	public $zalogowany = false;
 	public $validacja_telefon;
 	public $validacja_haslo;
 	public $validacja_e_mail;
 	public $validacja_pseudonim = true;
 
 	public function __construct() {
+		$this->host = $_SERVER['HTTP_HOST'];
+		$this->uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+		$this->formularzLogowanie = 'formularz_Logowania.php';
 		if($this->getFileName($_SERVER['PHP_SELF']) == "zarejestrowany.php") {
 			$this->Org_mdl = new Organizator_model(true);
 		}
@@ -31,24 +38,41 @@ class Orgranizator_controller {
 				$this->validacja_telefon == true &&
 				$this->validacja_e_mail == true) {
 			$this->Org_mdl->INSERT_Dodaj_organizatora();
-		}
+			echo "Twoje konto zosta³o utworzone mo¿esz siê teraz zalogowaæ";
+			header("Location: http://$this->host.$this->uri/$this->formularzLogowanie");
 
+		}
 	}
 
 	public function zaloguj() {
-		session_start();
-		$_SESSION['pseudonim'] = $this->Org_mdl->Pseudonim;
 
+		foreach ($this->Org_mdl->db->PDO->query(constant('Organizator_model::pseudonim_query')) as $wiersz) {
+			if((string)$this->Org_mdl->Pseudonim == $wiersz['Pseudonim']) {
+				foreach($this->Org_mdl->db->PDO->query($this->Org_mdl->getHasloByPseudonim()) as $haslo) {
+					if(md5($this->Org_mdl->haslo) == $haslo['haslo']) {
+						$this->zalogowany = true;
+						echo "zostales zalogowany :   Witamy w portalu <b>mojaimpreza.pl</b>";
+						session_start();
+						$_SESSION['pseudonim'] = $this->Org_mdl->Pseudonim;
+					}
+				}
+			}
+		}
+		if($this->zalogowany == false) {
+			echo "Podano b³êdny login lub has³o";
+		}
 	}
 
 	private function val_haslo() {
 		if ($this->Org_mdl->haslo == NULL) {
 			echo "Musisz podaæ has³o <br>";
+			$validacja_haslo = false;
 		}
 		else if($this->Org_mdl->haslo == $this->Org_mdl->validacja_haslo) {
 			$this->validacja_haslo = true;
 		}
 		else {
+			$validacja_haslo = false;
 			echo "Wprowadzone has³a nie s¹ jednoznaczne<br>";
 		}
 	}
@@ -74,10 +98,9 @@ class Orgranizator_controller {
 
 	private function val_pseudonim() {
 
-		$pseudonim_query = "SELECT Pseudonim FROM organizator";
-		foreach ($this->Org_mdl->db->PDO->query($pseudonim_query) as $wiersz) {
+		foreach ($this->Org_mdl->db->PDO->query(constant('Organizator_model::pseudonim_query')) as $wiersz) {
 			if((string)$this->Org_mdl->Pseudonim == $wiersz['Pseudonim']) {
-				print "Podana nazwa ".  $this->Org_mdl->Pseudonim   ." jest ju¿ zajêta spróbuj innej <br>";
+				print "Podana nazwa ".  $this->Org_mdl->Pseudonim   ." jest ju¿ zajêta spróbuj innej";
 				$this->validacja_pseudonim = false;
 			}
 		}
@@ -97,8 +120,8 @@ class Orgranizator_controller {
 	}
 
 	private function getFileName($php_self) {
-		$filename = explode("/",$php_self); // THIS WILL BREAK DOWN THE PATH INTO AN ARRAY
-		$filename = array_reverse($filename); // THIS WILL MAKE LAST ELEMENT THE FIRST
+		$filename = explode("/",$php_self);
+		$filename = array_reverse($filename);
 		return $filename[0];
 	}
 
