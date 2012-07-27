@@ -1,5 +1,3 @@
-<table border=0 align="center"><b>Twoje konto zosta³o utworzone mo¿esz siê teraz zalogowaæ</b></table>
-
 <H3 ALIGN="center">Logowanie</H3>
 
 <form action="zalogowany.php" method=post>

@@ -38,7 +38,8 @@ class Orgranizator_controller {
 				$this->validacja_telefon == true &&
 				$this->validacja_e_mail == true) {
 			$this->Org_mdl->INSERT_Dodaj_organizatora();
-			echo "Twoje konto zosta³o utworzone mo¿esz siê teraz zalogowaæ";
+			echo "Twoje konto zosta³o utworzone mo¿esz siê teraz zalogowaæ<br>
+					<a href='formularz_Logowania.php'>PrzejdŸ do logowania</a><br> ";
 			//header("Location: http://$this->host.$this->uri/$this->formularzLogowanie"); //TODO przyk³ad przekierowania
 
 		}
@@ -54,6 +55,7 @@ class Orgranizator_controller {
 						echo "zostales zalogowany :   Witamy w portalu <b>mojaimpreza.pl</b>";
 						session_start();
 						$_SESSION['pseudonim'] = $this->Org_mdl->Pseudonim;
+						break;
 					}
 				}
 			}
@@ -106,12 +108,18 @@ class Orgranizator_controller {
 				print "Podana nazwa ".  $this->Org_mdl->Pseudonim   ." jest ju¿ zajêta spróbuj innej";
 				$this->validacja_pseudonim = false;
 			}
+			else if(!$this->pregMatch($this->Org_mdl->Pseudonim, "AZ09") == true) {
+				$this->validacja_pseudonim = false;
+				echo "Pseudonim nie mo¿e zawieraæ znaków specjalnych<br>";
+				break;
+			}
 		}
 	}
 
 	private function val_telefon() {
 
-		if(strlen((string)$this->Org_mdl->Telefon) >6 && strlen((string)$this->Org_mdl->Telefon) <13) {
+		if(strlen((string)$this->Org_mdl->Telefon) >6 &&
+				strlen((string)$this->Org_mdl->Telefon) <13) {
 			if(filter_var($this->Org_mdl->Telefon,FILTER_VALIDATE_INT)) {
 				$this->validacja_telefon = true;
 			}
