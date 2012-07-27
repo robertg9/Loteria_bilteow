@@ -39,7 +39,7 @@ class Orgranizator_controller {
 				$this->validacja_e_mail == true) {
 			$this->Org_mdl->INSERT_Dodaj_organizatora();
 			echo "Twoje konto zosta³o utworzone mo¿esz siê teraz zalogowaæ";
-			header("Location: http://$this->host.$this->uri/$this->formularzLogowanie");
+			//header("Location: http://$this->host.$this->uri/$this->formularzLogowanie"); //TODO przyk³ad przekierowania
 
 		}
 	}
@@ -64,16 +64,19 @@ class Orgranizator_controller {
 	}
 
 	private function val_haslo() {
+
 		if ($this->Org_mdl->haslo == NULL) {
 			echo "Musisz podaæ has³o <br>";
-			$validacja_haslo = false;
+			$this->validacja_haslo = false;
 		}
-		else if($this->Org_mdl->haslo == $this->Org_mdl->validacja_haslo) {
-			$this->validacja_haslo = true;
+		else if($this->pregMatch($this->Org_mdl->haslo, "AZ09") == true) {
+		 if($this->Org_mdl->haslo == $this->Org_mdl->validacja_haslo) {
+				$this->validacja_haslo = true;
+			}
 		}
 		else {
-			$validacja_haslo = false;
-			echo "Wprowadzone has³a nie s¹ jednoznaczne<br>";
+			$this->validacja_haslo = false;
+			echo "Wprowadzone has³a nie s¹ jednoznaczne , b¹dŸ zawiera znaki specjalne takie jak !@#$%^&*()<br>";
 		}
 	}
 
@@ -123,6 +126,26 @@ class Orgranizator_controller {
 		$filename = explode("/",$php_self);
 		$filename = array_reverse($filename);
 		return $filename[0];
+	}
+
+	private function pregMatch($string,$rodzaj) {  //TODO preg_match
+		if($rodzaj == "AZ") {
+			if(preg_match('/^[A-Za-z]*$/i', $string)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		if($rodzaj == "AZ09") {
+			if(preg_match('/^[A-Za-z0-9]*$/i', $string)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+
+		}
 	}
 
 }
