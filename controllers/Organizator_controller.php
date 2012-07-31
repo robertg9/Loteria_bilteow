@@ -1,15 +1,16 @@
 <?php
 
 include '/../models/Organizator_model.php';
+require '/../libs/Smarty.class.php';
 
-require  '/../smarty.php';
 
 class Orgranizator_controller {
-	
-	private $host;
-	private $uri;
+
+	//private $host;
+	//private $uri;
 	private $formularzLogowanie;
 
+	public $smarty;
 	public $Org_mdl;
 	public $zalogowany = false;
 	public $validacja_telefon;
@@ -17,9 +18,16 @@ class Orgranizator_controller {
 	public $validacja_e_mail;
 	public $validacja_pseudonim = true;
 
+
 	public function __construct() {
-		$this->host = $_SERVER['HTTP_HOST'];
-		$this->uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+		$this->smarty = new Smarty();
+		$this->smarty->template_dir = "views";
+		$this->smarty->debugging = true;
+		$this->smarty->caching = true;
+		$this->smarty->cache_lifetime = 120;
+
+		//$this->host = $_SERVER['HTTP_HOST'];
+		//$this->uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 		$this->formularzLogowanie = 'formularz_Logowania.php';
 		if($this->getFileName($_SERVER['PHP_SELF']) == "zarejestrowany.php") {
 			$this->Org_mdl = new Organizator_model(true);
@@ -49,6 +57,7 @@ class Orgranizator_controller {
 	}
 
 	public function zaloguj() {
+		$this->smarty->assign("uzytkownik","nie jestes zalogowany");
 
 		foreach ($this->Org_mdl->db->PDO->query(constant('Organizator_model::pseudonim_query')) as $wiersz) {
 			if((string)$this->Org_mdl->Pseudonim == $wiersz['Pseudonim']) {
@@ -58,6 +67,7 @@ class Orgranizator_controller {
 						echo "zostales zalogowany :   Witamy w portalu <b>mojaimpreza.pl</b>";
 						session_start();
 						$_SESSION['pseudonim'] = $this->Org_mdl->Pseudonim;
+						$this->smarty->assign("uzytkownik",$_SESSION['pseudonim']);
 						break;
 					}
 				}
@@ -120,12 +130,16 @@ class Orgranizator_controller {
 	}
 
 	private function val_telefon() {
-
-		if(strlen((string)$this->Org_mdl->Telefon) >6 &&
-				strlen((string)$this->Org_mdl->Telefon) <13) {
-			if(filter_var($this->Org_mdl->Telefon,FILTER_VALIDATE_INT)) {
-				$this->validacja_telefon = true;
-			}
+echo $_SERVER['PHP_SELF'];
+		//if(strlen((string)$this->Org_mdl->Telefon) >6 &&
+		//strlen((string)$this->Org_mdl->Telefon) <13) {
+		if(filter_var($this->Org_mdl->Telefon,FILTER_VALIDATE_INT)) {
+			echo " TELEFON poprawny<bt>";
+			$this->validacja_telefon = true;
+			//}
+		}
+		elseif($this->Org_mdl->Telefon == NULL) {
+			echo "Musisz podaæ jakiœ numer telefonu<br>";
 		}
 		else {
 			$this->validacja_telefon = false;

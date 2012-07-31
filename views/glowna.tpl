@@ -1,11 +1,10 @@
 
 {if isset($uzytkownik)}
+Zalogowany jako : {$smarty.session.pseudonim}
+{/if} 
 
-zalogowany jako : {$smarty.session."pseudonim"}
-{$smarty.session.id} == $_SESSION['pseudonim'];
-{/if}
-
-<br> 
+<br>
 <a href="zarejestruj">Rejestracja</a><br>
 <a href="logowanie">Zaloguj</a><br>
 <a href="controllers/testy.php">Tedty</a>
+
