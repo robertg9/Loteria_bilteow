@@ -1,6 +1,6 @@
 <?php
 include("/../db/Database.php");
-class Imprezy_model{
+class Imprezy_model {
 	
 	public $db;
 	public $id_Imprezy;
@@ -33,8 +33,8 @@ class Imprezy_model{
 
 	public function INSERT_Dodaj_organizatora() {
 		$md5 = md5($this->haslo) ;
-		$this->db->PDO->exec("INSERT INTO organizator
-				(Imie,Nazwisko,Telefon,e_mail,Pseudonim,haslo) VALUES (
+		$this->db->PDO->exec("INSERT INTO imprezy
+				(Nazwa,Opis,Miasto,Ulica,Numer,Data_rozpoczecia,Data_zakoñczenia,Data_zakoñczenia_Rekrutacji) VALUES (
 				'$this->Imie',
 				'$this->Nazwisko',
 				'$this->Telefon',

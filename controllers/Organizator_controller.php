@@ -2,7 +2,10 @@
 
 include '/../models/Organizator_model.php';
 
+require  '/../smarty.php';
+
 class Orgranizator_controller {
+	
 	private $host;
 	private $uri;
 	private $formularzLogowanie;
@@ -158,4 +161,6 @@ class Orgranizator_controller {
 
 }
 
+
 ?>
+
