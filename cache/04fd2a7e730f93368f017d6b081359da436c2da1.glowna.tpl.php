@@ -12,10 +12,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'nocache_hash' => '124245017bc3086e1e3-12367234',
   'cache_lifetime' => 120,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_5018f908751590_81244615',
+  'unifunc' => 'content_50193a45db7d53_51825977',
   'has_nocache_code' => false,
 ),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5018f908751590_81244615')) {function content_5018f908751590_81244615($_smarty_tpl) {?> 
+<?php if ($_valid && !is_callable('content_50193a45db7d53_51825977')) {function content_50193a45db7d53_51825977($_smarty_tpl) {?> 
 
 <br>
 <a href="zarejestruj">Rejestracja</a><br>

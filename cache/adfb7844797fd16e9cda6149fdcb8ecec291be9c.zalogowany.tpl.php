@@ -12,9 +12,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'nocache_hash' => '138395017b580970552-01537133',
   'cache_lifetime' => 120,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_5018f94bd2ab78_30178048',
+  'unifunc' => 'content_50193a4f5c2da9_91266779',
   'has_nocache_code' => false,
 ),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5018f94bd2ab78_30178048')) {function content_5018f94bd2ab78_30178048($_smarty_tpl) {?> 
+<?php if ($_valid && !is_callable('content_50193a4f5c2da9_91266779')) {function content_50193a4f5c2da9_91266779($_smarty_tpl) {?><br>Zalogowany jako : robertg999 <br>
+<a href="dodajImpreze">Dodaj Ofertê Imrpezy</a> <br>
+<a href="index.php">Home</a> 
+ 
 <a href="logowanie">Powrót</a><br>
 <?php }} ?>

@@ -18,7 +18,8 @@ class Orgranizator_controller {
 	public $validacja_e_mail;
 	public $validacja_pseudonim = true;
 
-	public function __construct() {
+	public function __construct($database) {
+		$this->db = $database;
 		$this->smarty = new Smarty();
 		$this->smarty->template_dir = "views";
 		$this->smarty->debugging = true;
@@ -28,13 +29,9 @@ class Orgranizator_controller {
 		//$this->host = $_SERVER['HTTP_HOST'];
 		//$this->uri = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 		$this->formularzLogowanie = 'formularz_Logowania.php';
-		if($this->getFileName($_SERVER['PHP_SELF']) == "zarejestrowany.php") {
-			$this->Org_mdl = new Organizator_model(true);
-		}
-		else {
-			$this->Org_mdl = new Organizator_model(false);
-		}
+		$this->Org_mdl = new Organizator_model($this->db);
 	}
+
 
 	public function validacja() {
 		$this->Org_mdl->rejestracja();
@@ -83,7 +80,7 @@ class Orgranizator_controller {
 			$this->validacja_haslo = false;
 		}
 		else if($this->pregMatch($this->Org_mdl->haslo, "AZ09") == true) {
-		 if($this->Org_mdl->haslo == $this->Org_mdl->validacja_haslo) {
+			if($this->Org_mdl->haslo == $this->Org_mdl->validacja_haslo) {
 				$this->validacja_haslo = true;
 			}
 		}

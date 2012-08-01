@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2012-08-01 11:36:54
+<?php /* Smarty version Smarty-3.1.11, created on 2012-08-01 14:43:41
          compiled from "views\Imprezy\dodajImpreze.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:229925017e6bc563038-08265132%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '56ced9f54e20b813e2f138724ff58fa799f37852' => 
     array (
       0 => 'views\\Imprezy\\dodajImpreze.tpl',
-      1 => 1343813800,
+      1 => 1343824635,
       2 => 'file',
     ),
   ),
@@ -24,33 +24,33 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 
 <?php if (isset($_SESSION['pseudonim'])){?>
-<form action="impreza_dodana.php" method=post>
+<form action="imprezaDodana" method=post>
 	<table border=0 align="center">
 		<tr>
 			<td bgcolor=#CCFFFF>Nazwa:</td>
-			<td bgcolor=#99CCFF><input type="text" name="Nazwa" size="20"
+			<td bgcolor=#99CCFF><input type="text" name="nazwa" size="20"
 				maxlength="15"></td>
 		</tr>
 		<tr>
 			<td bgcolor=#CCFFFF>Opis:</td>
-			<td bgcolor=#99CCFF><textarea name="Opis" rows="8" cols="50"></textarea>
+			<td bgcolor=#99CCFF><textarea name="opis" rows="8" cols="50"></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td bgcolor=#CCFFFF>Miasto:</td>
-			<td bgcolor=#99CCFF><input type="text" name="Miasto" size="20"
+			<td bgcolor=#99CCFF><input type="text" name="miasto" size="20"
 				maxlength="15"></td>
 		</tr>
 
 		<tr>
 			<td bgcolor=#CCFFFF>Ulica:</td>
-			<td bgcolor=#99CCFF><input type="text" name="Ulica" size="20"
+			<td bgcolor=#99CCFF><input type="text" name="ulica" size="20"
 				maxlength="15"></td>
 		</tr>
 
 		<tr>
 			<td bgcolor=#CCFFFF>Numer:</td>
-			<td bgcolor=#99CCFF><input type="text" name="Numer" size="20"
+			<td bgcolor=#99CCFF><input type="text" name="numer" size="20"
 				maxlength="15"></td>
 		</tr>
 

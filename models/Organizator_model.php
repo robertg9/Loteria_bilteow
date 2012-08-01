@@ -1,11 +1,12 @@
 <?php
-include("/../db/Database.php");
+//include("/../db/Database.php");
 
 class Organizator_model {
 
 	const pseudonim_query = 'SELECT Pseudonim FROM organizator';
 
 	public $db;
+	public $db2;
 	public $id_Organizator;
 	public $Imie;
 	public $Nazwisko;
@@ -16,8 +17,8 @@ class Organizator_model {
 	public $haslo;
 	public $validacja_haslo;
 
-	public function __construct() {
-		$this->db = new Database("root", "", "loteria_biletów");
+	public function __construct($database) {
+		$this->db = $database;
 		$this->db->connect();
 	}
 	public function logowanie() {

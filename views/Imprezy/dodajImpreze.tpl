@@ -2,33 +2,33 @@
 
 
 {if isset($smarty.session.pseudonim)}
-<form action="impreza_dodana.php" method=post>
+<form action="imprezaDodana" method=post>
 	<table border=0 align="center">
 		<tr>
 			<td bgcolor=#CCFFFF>Nazwa:</td>
-			<td bgcolor=#99CCFF><input type="text" name="Nazwa" size="20"
+			<td bgcolor=#99CCFF><input type="text" name="nazwa" size="20"
 				maxlength="15"></td>
 		</tr>
 		<tr>
 			<td bgcolor=#CCFFFF>Opis:</td>
-			<td bgcolor=#99CCFF><textarea name="Opis" rows="8" cols="50"></textarea>
+			<td bgcolor=#99CCFF><textarea name="opis" rows="8" cols="50"></textarea>
 			</td>
 		</tr>
 		<tr>
 			<td bgcolor=#CCFFFF>Miasto:</td>
-			<td bgcolor=#99CCFF><input type="text" name="Miasto" size="20"
+			<td bgcolor=#99CCFF><input type="text" name="miasto" size="20"
 				maxlength="15"></td>
 		</tr>
 
 		<tr>
 			<td bgcolor=#CCFFFF>Ulica:</td>
-			<td bgcolor=#99CCFF><input type="text" name="Ulica" size="20"
+			<td bgcolor=#99CCFF><input type="text" name="ulica" size="20"
 				maxlength="15"></td>
 		</tr>
 
 		<tr>
 			<td bgcolor=#CCFFFF>Numer:</td>
-			<td bgcolor=#99CCFF><input type="text" name="Numer" size="20"
+			<td bgcolor=#99CCFF><input type="text" name="numer" size="20"
 				maxlength="15"></td>
 		</tr>
 
