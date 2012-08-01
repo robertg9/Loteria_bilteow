@@ -18,7 +18,6 @@ class Orgranizator_controller {
 	public $validacja_e_mail;
 	public $validacja_pseudonim = true;
 
-
 	public function __construct() {
 		$this->smarty = new Smarty();
 		$this->smarty->template_dir = "views";
@@ -38,6 +37,7 @@ class Orgranizator_controller {
 	}
 
 	public function validacja() {
+		$this->Org_mdl->rejestracja();
 
 		$this->val_telefon();
 		$this->val_haslo();
@@ -57,8 +57,7 @@ class Orgranizator_controller {
 	}
 
 	public function zaloguj() {
-		$this->smarty->assign("uzytkownik","nie jestes zalogowany");
-
+		$this->Org_mdl->logowanie();
 		foreach ($this->Org_mdl->db->PDO->query(constant('Organizator_model::pseudonim_query')) as $wiersz) {
 			if((string)$this->Org_mdl->Pseudonim == $wiersz['Pseudonim']) {
 				foreach($this->Org_mdl->db->PDO->query($this->Org_mdl->getHasloByPseudonim()) as $haslo) {
@@ -67,7 +66,6 @@ class Orgranizator_controller {
 						echo "zostales zalogowany :   Witamy w portalu <b>mojaimpreza.pl</b>";
 						session_start();
 						$_SESSION['pseudonim'] = $this->Org_mdl->Pseudonim;
-						$this->smarty->assign("uzytkownik",$_SESSION['pseudonim']);
 						break;
 					}
 				}
@@ -130,13 +128,11 @@ class Orgranizator_controller {
 	}
 
 	private function val_telefon() {
-echo $_SERVER['PHP_SELF'];
-		//if(strlen((string)$this->Org_mdl->Telefon) >6 &&
-		//strlen((string)$this->Org_mdl->Telefon) <13) {
-		if(filter_var($this->Org_mdl->Telefon,FILTER_VALIDATE_INT)) {
-			echo " TELEFON poprawny<bt>";
-			$this->validacja_telefon = true;
-			//}
+		if(strlen((string)$this->Org_mdl->Telefon) >6 &&
+				strlen((string)$this->Org_mdl->Telefon) <13) {
+			if(filter_var($this->Org_mdl->Telefon,FILTER_VALIDATE_INT)) {
+				$this->validacja_telefon = true;
+			}
 		}
 		elseif($this->Org_mdl->Telefon == NULL) {
 			echo "Musisz podaæ jakiœ numer telefonu<br>";

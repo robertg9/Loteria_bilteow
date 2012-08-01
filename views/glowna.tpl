@@ -1,5 +1,5 @@
 
-{if isset($uzytkownik)}
+{if isset($smarty.session.pseudonim)}
 Zalogowany jako : {$smarty.session.pseudonim}
 {/if} 
 

@@ -16,27 +16,23 @@ class Organizator_model {
 	public $haslo;
 	public $validacja_haslo;
 
-	public function __construct($bool_rejestracja) {
+	public function __construct() {
 		$this->db = new Database("root", "", "loteria_biletów");
 		$this->db->connect();
-		
-		if($bool_rejestracja == true) {
-			$this->Pseudonim = $_POST['pseudonim'];
-			$this->Imie = $_POST['imie'];
-			$this->Nazwisko = $_POST['nazwisko'];
-			$this->Telefon = $_POST['telefon'];
-			$this->e_mail = $_POST['e_mail'];
-			$this->validacja_e_mail = $_POST['validacja_e_mail'];
-			$this->haslo = $_POST['haslo'];
-			$this->validacja_haslo = $_POST['validacja_haslo'];
-		}
-		else if($bool_rejestracja == false) {
-			$this->Pseudonim = $_POST['pseudonim'];
-			$this->haslo = $_POST['haslo'];
-		}
-		else {
-			echo "zmienna podana w konstruktorze musi byæ typu boolena(true lub false)";
-		}
+	}
+	public function logowanie() {
+		$this->Pseudonim = $_POST['pseudonim'];
+		$this->haslo = $_POST['haslo'];
+	}
+	public function rejestracja() {
+		$this->Pseudonim = $_POST['pseudonim'];
+		$this->Imie = $_POST['imie'];
+		$this->Nazwisko = $_POST['nazwisko'];
+		$this->Telefon = $_POST['telefon'];
+		$this->e_mail = $_POST['e_mail'];
+		$this->validacja_e_mail = $_POST['validacja_e_mail'];
+		$this->haslo = $_POST['haslo'];
+		$this->validacja_haslo = $_POST['validacja_haslo'];
 	}
 
 

@@ -15,25 +15,20 @@ switch($url) {
 		$organizator_logowanie = new Orgranizator_controller();
 		$organizator_logowanie->zaloguj();
 		$organizator_logowanie->smarty->display('Organizator/zalogowany.tpl');
-		//include("views/Organizator/zalogowany.php");
 		break;
 	case "index.php":
-		//include("views/glowna.php");
 		session_start();
 		if(isset($_SESSION['pseudonim'])) {
 			$smarty->assign("uzytkownik",$_SESSION['pseudonim']);
-			
-		
 		}
-
 		$smarty->display("glowna.tpl");
 		break;
 	case "zarejestruj":
 		include("views/Organizator/rejestracja.php");
 		break;
 	case "zarejestrowany":
-		//$organizator_rejestracja = new Orgranizator_controller();
-		//$organizator_rejestracja->validacja();
+		$organizator_rejestracja = new Orgranizator_controller();
+		$organizator_rejestracja->validacja();
 		include("views/Organizator/zarejestrowany.php");
 		break;
 	case "logowanie":
@@ -41,7 +36,8 @@ switch($url) {
 		break;
 
 	case "dodajImpreze":
-		include("views/Imprezy/dodajImpreze.php");
+		session_start();
+		$smarty->display("Imprezy/dodajImpreze.tpl");
 		break;
 }
 function getFileName($php_self) {
@@ -51,8 +47,6 @@ function getFileName($php_self) {
 }
 
 ?>
-
-
 
 
 
