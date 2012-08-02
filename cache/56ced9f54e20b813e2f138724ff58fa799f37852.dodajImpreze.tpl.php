@@ -12,10 +12,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'nocache_hash' => '229925017e6bc563038-08265132',
   'cache_lifetime' => 120,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_50193a529075c5_79084844',
+  'unifunc' => 'content_501a28ed834c20_87583203',
   'has_nocache_code' => false,
 ),true); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_50193a529075c5_79084844')) {function content_50193a529075c5_79084844($_smarty_tpl) {?>
+<?php if ($_valid && !is_callable('content_501a28ed834c20_87583203')) {function content_501a28ed834c20_87583203($_smarty_tpl) {?>
 
 <form action="imprezaDodana" method=post>
 	<table border=0 align="center">

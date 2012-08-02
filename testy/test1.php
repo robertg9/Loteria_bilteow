@@ -2,7 +2,7 @@
 include("/../db/Database.php");
 include('test2.php');
 
-$PDO = new Database("root", "", "loteria_biletów");
+
 class  test1 {
 	public $db;
 
@@ -10,12 +10,20 @@ class  test1 {
 		$this->db = $pdo;
 		$this->db->connect();
 	}
+	public function tt() {
+		$query = $this->db->PDO->query("SELECT *FROM imprezy");
+		foreach($query->fetchAll() as $row) {
+			echo $row['Opis']."<br>";
+		}
+	}
 }
 
 //$a = new test1();
+$PDO = new Database("root", "", "loteria_biletów");
 $b = new test1($PDO);
-$b = new test2($PDO);
+$b->tt();
+//$b = new test2($PDO);
 
 ?>
 
-<a href="test2.php" >test2</a>
+<a href="test2.php">test2</a>

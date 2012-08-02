@@ -25,6 +25,10 @@ switch($url) {
 		if(isset($_SESSION['pseudonim'])) {
 			$smarty->assign("uzytkownik",$_SESSION['pseudonim']);
 		}
+		$database->connect();
+		$query = "SELECT *FROM imprezy";
+		$result = $database->PDO->query($query);
+		$smarty->assign('imprezy', $result);
 		$smarty->display("glowna.tpl");
 		break;
 	case "zarejestruj":
@@ -48,6 +52,7 @@ switch($url) {
 		$imprezyMmodel->dodajImpreze();
 		include("views/Imprezy/impreza_dodana.php");
 		break;
+		
 }
 function getFileName($php_self) {
 	$filename = explode("/",$php_self);

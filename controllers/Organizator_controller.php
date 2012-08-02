@@ -47,7 +47,7 @@ class Orgranizator_controller {
 				$this->validacja_e_mail == true) {
 			$this->Org_mdl->INSERT_Dodaj_organizatora();
 			echo "Twoje konto zosta³o utworzone mo¿esz siê teraz zalogowaæ<br>
-					<a href='formularz_Logowania.php'>PrzejdŸ do logowania</a><br> ";
+					<a href='logowanie'>PrzejdŸ do logowania</a><br> ";
 			//header("Location: http://$this->host.$this->uri/$this->formularzLogowanie"); //TODO przyk³ad przekierowania
 
 		}

@@ -12,6 +12,7 @@ class Imprezy_model {
 	public $dataRozpoczecia;
 	public $dataZakonczenia;
 	public $dataZakonczeniaRekrutacji;
+	public $imprezy;
 
 	public function __construct($database) {
 		$this->db = $database;
@@ -28,7 +29,7 @@ class Imprezy_model {
 		$this->dataZakonczeniaRekrutacji = $_POST['rokR']."-".$_POST['miesiacR']."-".$_POST['dzienR'];
 		echo $this->pseudonimOrganizator;
 	}
-
+	
 	public function dodajImpreze() {
 		//$md5 = md5($this->haslo) ;
 		$dodajImpreze = "INSERT INTO imprezy
